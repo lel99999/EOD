@@ -1,0 +1,10 @@
+---
+- hosts: mit01
+  name: provision and install kerberos
+  tasks:
+    - name: install libselinux-python
+      become: yes
+      become_method: sudo
+      yum:
+        name: libselinux-python
+        state: present

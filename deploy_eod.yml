@@ -1,5 +1,5 @@
 ---
-- hosts: mit01
+- hosts: eodrh7
   name: provision and install kerberos
   tasks:
     - name: install libselinux-python

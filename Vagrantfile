@@ -20,6 +20,30 @@ Vagrant.configure("2") do |config|
 
     eodrh7.vm.provision "ansible" do |ansible|
       ansible.playbook = "deploy_eod.yml"
+      ansible.inventory_path = "vagrant_hosts"
+      ansible.tags = ansible_tags
+      ansible.verbose = ansible_verbosity
+      ansible.extra_vars = ansible_extra_vars
+      ansible.limit = ansible_limit
     end
   end
+### Research EOD server - CentOS6.7
+#  config.vm.define :research_eod do |server|
+#    server.vm.box = "bento/centos-6.7"
+#    server.vm.host_name = "research-eod.test.dev"
+#
+#    server.ssh.forward_agent = true
+#
+#    server.vm.provision "ansible" do |ansible|
+#      ansible.playbook = "deploy_research_environment.yml"
+#      ansible.inventory_path = "vagrant_hosts"
+#      ansible.tags = ansible_tags
+#      ansible.verbose = ansible_verbosity
+#      ansible.extra_vars = ansible_extra_vars
+#      ansible.limit = ansible_limit
+#    end
+
+#    server.vm.network :private_network, ip: "10.0.1.19"
+#  end
+
 end

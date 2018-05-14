@@ -17,14 +17,34 @@ Vagrant.configure("2") do |config|
     eodrh7.vm.hostname = "rhel7"
     eodrh7.vm.network "private_network", ip: "192.168.60.172"
     eodrh7.vm.provision "shell", :inline => "sudo echo '192.168.60.172 eodrh7.local eodrh7' >> /etc/hosts"
+    eodrh7.vm.provision "shell", :inline => "sudo echo '192.168.60.173 eodapp7.local eodapp7' >> /etc/hosts"
 
     eodrh7.vm.provision "ansible" do |ansible|
       ansible.playbook = "deploy_eod.yml"
       ansible.inventory_path = "vagrant_hosts"
-      ansible.tags = ansible_tags
-      ansible.verbose = ansible_verbosity
-      ansible.extra_vars = ansible_extra_vars
-      ansible.limit = ansible_limit
+      #ansible.tags = ansible_tags
+      #ansible.verbose = ansible_verbosity
+      #ansible.extra_vars = ansible_extra_vars
+      #ansible.limit = ansible_limit
+    end
+  end
+
+  config.vm.define "eodapp7" do |eodapp7|
+    eodapp7.vm.box = "iamseth/rhel-7.3"
+    #eodrh7.vm.box = "javier-lopez/rhel-7.4"
+    #eodrh7.vm.box = "xianlin/rhel-7.4"
+    eodapp7.vm.hostname = "rhel7"
+    eodapp7.vm.network "private_network", ip: "192.168.60.173"
+    eodapp7.vm.provision "shell", :inline => "sudo echo '192.168.60.172 eodrh7.local eodrh7' >> /etc/hosts"
+    eodapp7.vm.provision "shell", :inline => "sudo echo '192.168.60.173 eodapp7.local eodapp7' >> /etc/hosts"
+
+    eodapp7.vm.provision "ansible" do |ansible|
+      ansible.playbook = "deploy_eod.yml"
+      ansible.inventory_path = "vagrant_hosts"
+      #ansible.tags = ansible_tags
+      #ansible.verbose = ansible_verbosity
+      #ansible.extra_vars = ansible_extra_vars
+      #ansible.limit = ansible_limit
     end
   end
 ### Research EOD server - CentOS6.7

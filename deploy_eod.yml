@@ -18,9 +18,11 @@
       yum:
         name: libselinux-python
         state: present
-    - name: copy eodecs
+    - name: copy ecs local to remote
+      become: yes
+      become_method: sudo
       copy:
-        src: ./files/ecs-13.8.9-linux-x64.bin
+        src: files/ecs-13.8.9-linux-x64.bin 
         dest: /opt
 
 - hosts: eodapp7

@@ -1,6 +1,6 @@
 [linuxhosts]
-eodrh7
-eodapp7
+eodrh7 ansible_host=192.168.60.172
+eodapp7 ansible_host=192.168.60.173
 
 [windowshosts]
-winEOD01
+winEOD01 ansible_host=192.168.60.170

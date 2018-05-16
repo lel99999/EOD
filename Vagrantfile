@@ -10,11 +10,12 @@ Vagrant.configure("2") do |config|
     winEOD01.vm.hostname = "winEOD01"
     winEOD01.vm.network "private_network", ip: "192.168.60.170"
   end
+
   config.vm.define "eodrh7" do |eodrh7|
     eodrh7.vm.box = "iamseth/rhel-7.3"
     #eodrh7.vm.box = "javier-lopez/rhel-7.4"
     #eodrh7.vm.box = "xianlin/rhel-7.4"
-    eodrh7.vm.hostname = "rhel7"
+    eodrh7.vm.hostname = "eodrh7"
     eodrh7.vm.network "private_network", ip: "192.168.60.172"
     eodrh7.vm.provision "shell", :inline => "sudo echo '192.168.60.172 eodrh7.local eodrh7' >> /etc/hosts"
     eodrh7.vm.provision "shell", :inline => "sudo echo '192.168.60.173 eodapp7.local eodapp7' >> /etc/hosts"
@@ -33,7 +34,7 @@ Vagrant.configure("2") do |config|
     eodapp7.vm.box = "iamseth/rhel-7.3"
     #eodrh7.vm.box = "javier-lopez/rhel-7.4"
     #eodrh7.vm.box = "xianlin/rhel-7.4"
-    eodapp7.vm.hostname = "rhel7"
+    eodapp7.vm.hostname = "eodapp7"
     eodapp7.vm.network "private_network", ip: "192.168.60.173"
     eodapp7.vm.provision "shell", :inline => "sudo echo '192.168.60.172 eodrh7.local eodrh7' >> /etc/hosts"
     eodapp7.vm.provision "shell", :inline => "sudo echo '192.168.60.173 eodapp7.local eodapp7' >> /etc/hosts"

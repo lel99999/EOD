@@ -24,6 +24,15 @@
       copy:
         src: files/ecs-13.8.9-linux-x64.bin 
         dest: /opt
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: install ecs
+      become: yes
+      become_method: suod
+      command: /opt/ecs-13.8.9-linux-x64.bin
+
 
 - hosts: eodapp7
   become: yes

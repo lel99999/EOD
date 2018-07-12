@@ -49,8 +49,6 @@
 
     - name: modify /usr/local/Exceed../conf/admin/Xconfig/XDMCP_Query.cfg
 
-
-
 - hosts: eodapp7
   become: yes
   become_method: sudo

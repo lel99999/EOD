@@ -24,15 +24,30 @@
       copy:
         src: files/ecs-13.8.9-linux-x64.bin 
         dest: /opt
-        owner: root
-        group: root
-        mode: 0755
+    - name: groupinstall Desktop
+      yum:
+        name: "@GNOME Desktop"
+        state: present
+    - name: set GUI at startup
+      command: systemctl set-default graphical.target    
 
-    - name: install ecs
-      become: yes
-      become_method: suod
-      command: /opt/ecs-13.8.9-linux-x64.bin
+    - name: group install "General Purpose Desktop"
 
+    - name: group install "X Window System"
+
+    - name: replace /etc/gdm/custom.conf
+
+    - name: add /etc/X11/xorg.conf
+
+    - name: edit /Exceed../conf/admin/cluster.cfg
+  
+    - name: add rules to /etc/sysconfig/iptables
+
+    - name: modify /etc/inittab
+
+    - name: ensure S26haldaemon in /etc/rc5.d
+
+    - name: modify /usr/local/Exceed../conf/admin/Xconfig/XDMCP_Query.cfg
 
 - hosts: eodapp7
   become: yes

@@ -2,6 +2,48 @@
 - hosts: eodrh7
   become: yes
   become_method: sudo
+  vars:
+    install_desktop: False
+    eod_restart: False
+    eod_install: True
+    eod_upgrade: False
+    eod_installer: ecs-13.8.9-linux-x64.bin
+    eod_installer_directory: '/opt'
+
+    eod_client_ports:
+      - 5500
+      - 8406
+      - 8407
+      - 6000:6025 
+    eod_client_ports_udp:
+      - 177
+
+    eod_admins:
+      - vagrant
+
+    eod_install_directory: '/usr/local/eod'
+    eod_cm_password: PASSWORD
+
+    eod_datastore_password: PASSWORD
+    eod_cm_preferred_pcm: "{{ ansible_ssh_host }}" 
+    eod_cluster_name: "{{ ansible_ssh_host }}" 
+    xdmc_query_host: "{{ ansible_ssh_host }}" 
+
+    eod_use_license_server: 0
+    eod_license_server_host: 0
+    eod_license_server_cache: 0
+
+    eod_license_keys:
+      - AAAA-BBBBBB-CCCCCC-DDDD-EEEEEE-FFF -0123456789 123
+#     - AAAA-BBBBBB-CCCCCC-DDDD-EEEEEE-FFF -0123456789 123
+
+    gconf_settings:
+      -
+        setting: "/apps/gdm/simple-greeter/disable_user_list"
+        type: "bool"
+        value: "true"
+
+    eod_greeter_include: false
 #  roles:
 #    - {role: iptables, when: "iptables_config"}
 #    - {role: common, when: "install_glusterfs"}
@@ -19,16 +61,62 @@
     - name: copy ecs local to remote
       copy:
         src: files/ecs-13.8.9-linux-x64.bin 
-        dest: /opt
-    - name: groupinstall Desktop
-      yum:
-        name: "@GNOME Desktop"
-        state: present
-    - name: set GUI at startup
-      command: systemctl set-default graphical.target    
+        dest: /tmp
+
+ #   - name: Copy over the EOD bin file
+ #     copy:
+ #       src: "{{ eod_installer_directory }}/{{ eod_installer }}"
+ #       dest: "/tmp/"
+ #     when: custom_repo
+ #     tags:
+ #       - eod
+     
+    - name: Chmod EOD binary
+      file:
+        path: "/tmp/{{ eod_installer }}"
+        mode: a+x
+#     when: custom_repo
+      tags:
+        - eod
+     
+    - name: Ensure that eod directory exists
+      file:
+        path: "{{ eod_install_directory }}"
+        state: directory
+      tags:
+        - eod
+     
+    - name: Copy the eod expect script
+      template:
+        src: files/install_eod_server.exp
+        dest: /tmp/install_eod_server.exp
+        mode: a+x
+      tags:
+        - eod
+     
+    - name: run EOD expect script
+      shell: /tmp/install_eod_server.exp
+#     when: custom_repo
+      tags:
+        - eod
+     
+    - name: run eod silent install
+      shell: "{{ eod_install_directory }}/bin/install -s"
+#     when: custom_repo
+      args:
+        creates: "{{ eod_install_directory }}/bin/otecs"
+      tags:
+        - eod
+#   - name: groupinstall Desktop
+#     yum:
+#       name: "@GNOME Desktop"
+#       state: present
+#   - name: set GUI at startup
+#     command: systemctl set-default graphical.target    
 
 #   - name: install ecs
 #     command: /opt/ecs-13.8.9-linux-x64.bin
+
 #   - name: group install "General Purpose Desktop"
 
 #   - name: group install "X Window System"
@@ -47,6 +135,12 @@
 
 #   - name: modify /usr/local/Exceed../conf/admin/Xconfig/XDMCP_Query.cfg
 
+#   - name: modify /etc/inittab
+
+#   - name: ensure S26haldaemon in /etc/rc5.d
+
+#   - name: modify /usr/local/Exceed../conf/admin/Xconfig/XDMCP_Query.cfg
+
 - hosts: eodapp7
   become: yes
   become_method: sudo
@@ -57,5 +151,4 @@
       yum:
         name: libselinux-python
         state: present
-
 

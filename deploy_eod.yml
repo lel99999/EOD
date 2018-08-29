@@ -55,14 +55,10 @@
 #  post_tasks:
   tasks:
     - name: install libselinux-python
-      become: yes
-      become_method: sudo
       yum:
         name: libselinux-python
         state: present
     - name: copy ecs local to remote
-      become: yes
-      become_method: sudo
       copy:
         src: files/ecs-13.8.9-linux-x64.bin 
         dest: /tmp
@@ -118,6 +114,9 @@
 #   - name: set GUI at startup
 #     command: systemctl set-default graphical.target    
 
+#   - name: install ecs
+#     command: /opt/ecs-13.8.9-linux-x64.bin
+
 #   - name: group install "General Purpose Desktop"
 
 #   - name: group install "X Window System"
@@ -136,7 +135,11 @@
 
 #   - name: modify /usr/local/Exceed../conf/admin/Xconfig/XDMCP_Query.cfg
 
+#   - name: modify /etc/inittab
 
+#   - name: ensure S26haldaemon in /etc/rc5.d
+
+#   - name: modify /usr/local/Exceed../conf/admin/Xconfig/XDMCP_Query.cfg
 
 - hosts: eodapp7
   become: yes

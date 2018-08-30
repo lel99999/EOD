@@ -58,6 +58,13 @@
       yum:
         name: libselinux-python
         state: present
+    - name: install expect 
+      command: yum -y install expect
+#     yum:
+#       name: "{{ item }}"
+#     with_items:
+#       - expect
+#       - expect-dev
     - name: copy ecs local to remote
       copy:
         src: files/ecs-13.8.9-linux-x64.bin 
@@ -97,16 +104,34 @@
     - name: run EOD expect script
       shell: /tmp/install_eod_server.exp
 #     when: custom_repo
+      register: eod_expect
       tags:
         - eod
-     
-    - name: run eod silent install
-      shell: "{{ eod_install_directory }}/bin/install -s"
+    - name: run silent ecs install
+      command: /usr/local/eod/bin/install -s
+
+    - name: create rc links for ecs init script
+      command: /usr/local/eod/bin/otecs bootstart
+
+    - name: start ecs server
+      command: /usr/local/eod/bin/otecs start
+
+    - name: get ecs status
+      command: /usr/local/eod/bin/otecs status
+      register: ecs_status
+
+    - debug: msg={{ ecs_status.stdout_lines }}
+#    - debug: msg=eod_expect.stdout_lines
+
+### Run Silent Install     
+#    - name: run eod silent install
+#      shell: "{{ eod_install_directory }}/bin/install -s"
 #     when: custom_repo
-      args:
-        creates: "{{ eod_install_directory }}/bin/otecs"
-      tags:
-        - eod
+#      args:
+#        creates: "{{ eod_install_directory }}/bin/otecs"
+#      tags:
+#        - eod
+
 #   - name: groupinstall Desktop
 #     yum:
 #       name: "@GNOME Desktop"

@@ -1,7 +1,8 @@
 ---
 - name: Copy over the EOD bin file
   copy:
-    src: "{{ eod_installer_directory }}/{{ eod_installer }}"
+    src: "files/{{ eod_installer }}"
+#    src: "{{ eod_installer_directory }}/{{ eod_installer }}"
     dest: "/tmp/"
   when: custom_repo
   tags:
@@ -24,7 +25,7 @@
 
 - name: Copy the eod expect script
   template:
-    src: install_eod_server.exp
+    src: files/install_eod_server.exp
     dest: /tmp/install_eod_server.exp
     mode: a+x
   tags:

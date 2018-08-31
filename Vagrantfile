@@ -23,7 +23,8 @@ Vagrant.configure("2") do |config|
     eodrh7.vm.provision "shell", :inline => "sudo echo '192.168.60.173 eodapp7.local eodapp7' >> /etc/hosts"
 
     eodrh7.vm.provision "ansible" do |ansible|
-      ansible.playbook = "deploy_eod.yml"
+      ansible.playbook = "deploy_eodrole.yml"
+#     ansible.playbook = "deploy_eod.yml"
       ansible.inventory_path = "vagrant_hosts"
       #ansible.tags = ansible_tags
       #ansible.verbose = ansible_verbosity

@@ -144,13 +144,21 @@
 #   - restart prefdm
   tags:
     - eod
-
+# - can configure with systemctl set-default TARGET.target
 - name: configure inittab
   template:
     src: inittab
     dest: /etc/inittab
   tags:
     - eod
+
+
+- name: set runlevel 5 graphical.target on startup
+  command: systemctl set-default graphical.target
+  register: xtarget
+  tags:
+    - eod
+#- debug: var=xtarget.stdout_lines
 
 - name: configure xorg.conf
   template:
@@ -204,11 +212,7 @@
   changed_when: gdm_status.rc == 0
   tags:
     - eod
-- name: set XWindows on startup
-  command: systemctl set-default graphical.target
-  register: xtarget
 
-- debug: var=xtarget.stdout_lines
 ### Ensure EOD starts on boot
 
 - name: Check if EOD is configured to run on boot

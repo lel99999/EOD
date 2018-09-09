@@ -1,0 +1,54 @@
+---
+- hosts: eodapp7
+  become: yes
+  become_method: sudo
+#  pre-tasks:
+# roles:
+#   - eod7
+  tasks:
+    - name: Install Dependencies
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - openssl
+        - openssl-devel
+        - tree
+        - expect
+      tags:
+        - eod_app
+    - name: Install X Window System
+      yum:
+        name: "@X Window System"
+        state: present
+      tags:
+        - eod_app
+
+    - name: Install Desktop
+      yum:
+        name: "@gnome-desktop"
+        state: present
+      tags:
+        - eod_app
+
+    - name: Install Fonts
+      yum:
+        name: "@fonts"
+        state: present
+      tags:
+        - eod_app
+    - name: configure custom.conf
+      template:
+        src: custom.conf
+        dest: /etc/gdm/custom.conf
+        mode: 0644
+#     notify:
+#       - restart gdm
+    - name: restart gdm
+      command: systemctl restart gdm.service
+
+    - name: set runlevel 5 graphical.target on startup
+      command: systemctl set-default graphical.target
+      register: xtarget
+      tags:
+        - eod_app

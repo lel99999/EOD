@@ -101,6 +101,45 @@
   tags:
     - eod
 
+#- name: install Server with GUI 
+#  yum:
+#    name: "@^Server with GUI"
+#    state: present
+#  register: serverwithgui
+#  tags:
+#    - eod
+#- debug: var="{{ serverwithgui.stdout }}"
+
+#- name: install MATE (GNOME 2) Desktop 
+#  yum:
+#    name: "@MATE Desktop"
+#    state: present
+#  register: matedesktop
+#  tags:
+#    - eod
+#- debug: var="{{ matedesktop.stdout }}"
+- name: install epel-latest repo
+  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+- name: install XFCE4 Desktop 
+  yum:
+    name: "@xfce"
+    state: present
+  register: xfce4desktop
+  tags:
+    - eod
+#- debug: var="{{ xfce4desktop.stdout }}"
+
+- name: install MATE (GNOME 2) Desktop 
+  command: yum -y groupinstall "MATE Desktop"
+#  yum:
+#    name: "@MATE Desktop"
+#    state: present
+#  register: matedesktop
+#  tags:
+#    - eod
+#- debug: var="{{ matedesktop.stdout }}"
+
 #- name: install General Purpose Desktop
 - name: install Fonts
   yum:

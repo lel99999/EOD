@@ -1,7 +1,8 @@
 ---
-- hosts: eodrh7
+- hosts: research_eod7 
   become: yes
   become_method: sudo
 #  pre-tasks:
   roles:
+    - common7
     - eod7

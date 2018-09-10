@@ -23,5 +23,4 @@
 #       - ip6tables
 
   roles:
-    - common7
     - eod7

@@ -2,6 +2,6 @@
 - hosts: eodrh7
   become: yes
   become_method: sudo
-#  pre-tasks:
+#  pre_tasks:
   roles:
     - eod7

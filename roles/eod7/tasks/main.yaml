@@ -91,6 +91,7 @@
   yum:
     name: "@X Window System"
     state: present
+  skip_broken: yes
   tags:
     - eod
 

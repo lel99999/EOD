@@ -91,6 +91,7 @@
   yum:
     name: "@X Window System"
     state: present
+  ignore_errors: yes
   tags:
     - eod
 

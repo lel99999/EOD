@@ -91,15 +91,16 @@
   yum:
     name: "@X Window System"
     state: present
-  skip_broken: yes
+# skip_broken: yes
   tags:
     - eod
 
 - name: install Desktop
   yum:
+#   name: "@GNOME Desktop"
     name: "@gnome-desktop"
     state: present
-  skip_broken: yes
+# skip_broken: yes
   tags:
     - eod
 

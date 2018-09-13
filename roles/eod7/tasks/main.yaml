@@ -95,13 +95,14 @@
   tags:
     - eod
 
-#- name: install Desktop
-#  yum:
+- name: install Desktop
+  yum:
+    name: "@GNOME Desktop"
 #    name: "@gnome-desktop"
-#    state: present
-#  skip_broken: yes
-#  tags:
-#    - eod
+    state: present
+  skip_broken: yes
+  tags:
+    - eod
 
 #- name: install Server with GUI 
 #  yum:

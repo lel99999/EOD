@@ -97,7 +97,8 @@
 
 - name: install Desktop
   yum:
-    name: "@gnome-desktop"
+    name: "@GNOME Desktop"
+#    name: "@gnome-desktop"
     state: present
   skip_broken: yes
   tags:

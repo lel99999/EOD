@@ -1,4 +1,4 @@
-[research_eod]
+[research_eod7]
 eodrh7 ansible_host=192.168.60.172
 eodapp7 ansible_host=192.168.60.173
 

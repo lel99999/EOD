@@ -61,8 +61,8 @@ eod_greeter_include: false
 
 iptables_config: True
 deploy_iptables: True
-#iptables_chain: TEST-INPUT
-iptables_chain: INPUT
+iptables_chain: TEST-INPUT
+#iptables_chain: INPUT
 
 install_eod: True
 eod_restart: True

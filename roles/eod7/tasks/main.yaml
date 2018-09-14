@@ -91,7 +91,7 @@
   yum:
     name: "@X Window System"
     state: present
-  skip_broken: yes
+# skip_broken: yes
   tags:
     - eod
 
@@ -99,7 +99,7 @@
   yum:
     name: "@gnome-desktop"
     state: present
-  skip_broken: yes
+# skip_broken: yes
   tags:
     - eod
 

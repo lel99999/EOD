@@ -133,8 +133,8 @@
     - eod
 #- debug: var="{{ xfce4desktop.stdout }}"
 
-- name: install MATE (GNOME 2) Desktop 
-  command: yum -y groupinstall "MATE Desktop"
+#- name: install MATE (GNOME 2) Desktop 
+#  command: yum -y groupinstall "MATE Desktop"
 #  yum:
 #    name: "@MATE Desktop"
 #    state: present

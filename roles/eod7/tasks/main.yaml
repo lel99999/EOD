@@ -120,8 +120,10 @@
 #  tags:
 #    - eod
 #- debug: var="{{ matedesktop.stdout }}"
-- name: install epel-latest repo
-  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+#- name: install epel-latest repo
+#  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#  when:
 
 - name: install XFCE4 Desktop 
   yum:

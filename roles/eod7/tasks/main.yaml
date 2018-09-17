@@ -87,16 +87,19 @@
 
 ### Install and configure Desktop Environment
 
-- name: install X Window System
-  yum:
-    name: "@X Window System"
-    state: present
-# skip_broken: yes
-  tags:
-    - eod
+- name: install X, Desktop, fonts
+  command: yum -g groupinstall gnome-desktop x11 fonts
 
-- name: install Desktop
-  shell: yum -y groupinstall "gnome-desktop"
+#- name: install X Window System
+#  yum:
+#    name: "@X Window System"
+#    state: present
+# skip_broken: yes
+#  tags:
+#    - eod
+
+#- name: install Desktop
+#  shell: yum -y groupinstall "gnome-desktop"
 # yum:
 #   name: "@gnome-desktop"
 #   state: present

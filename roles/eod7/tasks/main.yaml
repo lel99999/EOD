@@ -274,10 +274,12 @@
     - eod
     
 - name: execute eodpatch.exp script
-  shell: /tmp/eodpatch.exp
+  command: /tmp/eodpatch.exp
   register: eodpatch
   tags:
     - eod
+    
+- debug: var=eodpatch
 
 ### Ensure EOD starts on boot
 

@@ -275,6 +275,7 @@
     
 - name: execute eodpatch.exp script
   command: /tmp/eodpatch.exp
+  meta: clear_host_errors
   register: eodpatch
   tags:
     - eod

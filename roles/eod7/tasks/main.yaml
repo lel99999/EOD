@@ -96,9 +96,10 @@
     - eod
 
 - name: install Desktop
-  yum:
-    name: "@gnome-desktop"
-    state: present
+  shell: yum -y groupinstall "gnome-desktop"
+# yum:
+#   name: "@gnome-desktop"
+#   state: present
 # skip_broken: yes
   tags:
     - eod

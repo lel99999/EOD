@@ -281,6 +281,9 @@
   tags:
     - eod
     
+- name: clear host errors`
+  meta: clear_host_errors
+    
 - debug: var=eodpatch
 
 ### Ensure EOD starts on boot

@@ -274,7 +274,8 @@
     - eod
     
 - name: execute eodpatch.exp script
-  command: /tmp/eodpatch.exp
+#  command: /tmp/eodpatch.exp
+  shell: /tmp/eodpatch.exp
   ignore_errors: yes
   register: eodpatch
   tags:

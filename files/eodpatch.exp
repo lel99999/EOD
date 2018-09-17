@@ -15,4 +15,5 @@ Proceed to patch permissions bits for /usr/local/eod/bin/sys directory and /usr/
  \[y\]es or \[n\]o, \[Enter\] for no: "
 send -- "y\r"
 #expect eof
-expect eod
+#expect eod
+interact

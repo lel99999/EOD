@@ -90,6 +90,9 @@
 - name: install X, Desktop, fonts
   command: yum -y groupinstall gnome-desktop x11 fonts
 
+- name: install gdm (gnome display manager)
+  command: yum -y install gdm
+  
 #- name: install X Window System
 #  yum:
 #    name: "@X Window System"

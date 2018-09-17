@@ -264,6 +264,21 @@
   tags:
     - eod
 
+# copy eodpatch expect script and execute
+- name: copy eodpatch.exp to remote
+  file:
+    path: /files/eodpatch.exp
+    dest: /tmp/eodpatch.exp
+    mode: a+x
+  tags:
+    - eod
+    
+- name: execute eodpatch.exp script
+  shell: /tmp/eodpatch.exp
+  register: eodpatch
+  tags:
+    - eod
+
 ### Ensure EOD starts on boot
 
 - name: Check if EOD is configured to run on boot

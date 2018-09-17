@@ -256,7 +256,8 @@
 
 - name: run gdm
 # command: start prefdm  -- for CentOS/RHEL6
-  command: systemctl start display-manager 
+#  command: systemctl start display-manager
+  command: systemctl start gdm
   register: gdm_status
   failed_when: gdm_status.rc != 0 and "Job is already running" not in gdm_status.stderr
   changed_when: gdm_status.rc == 0

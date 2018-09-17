@@ -9,7 +9,8 @@
 
 - name: restart gdm
 # shell: killall gdm-binary
-  shell: systemctl restart display-manager
+# shell: systemctl restart display-manager
+  shell: systemctl restart gdm
   ignore_errors: yes
   when: eod_restart
 

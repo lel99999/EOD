@@ -103,15 +103,13 @@
 
 - name: install Desktop
 #  shell: yum -y groupinstall "gnome-desktop"
- yum:
-   name: "@gnome-desktop"
-   state: present
+  yum:
+    name: "@gnome-desktop"
+    tate: present
 # skip_broken: yes
   tags:
     - eod
-  tags:
-    - eod
-
+  
 - name: install gdm (gnome display manager)
   command: yum -y install gdm
 

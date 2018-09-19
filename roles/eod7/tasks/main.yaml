@@ -87,28 +87,33 @@
 
 ### Install and configure Desktop Environment
 
-- name: install X, Desktop, fonts
-  command: yum -y groupinstall gnome-desktop x11 fonts
+#- name: install X, Desktop, fonts
+#  command: yum -y groupinstall gnome-desktop x11 fonts
 
-- name: install gdm (gnome display manager)
-  command: yum -y install gdm
+#- name: install gdm (gnome display manager)
+#  command: yum -y install gdm
   
-#- name: install X Window System
-#  yum:
-#    name: "@X Window System"
-#    state: present
-# skip_broken: yes
-#  tags:
-#    - eod
-
-#- name: install Desktop
-#  shell: yum -y groupinstall "gnome-desktop"
-# yum:
-#   name: "@gnome-desktop"
-#   state: present
+- name: install X Window System
+  yum:
+    name: "@X Window System"
+    state: present
 # skip_broken: yes
   tags:
     - eod
+
+- name: install Desktop
+#  shell: yum -y groupinstall "gnome-desktop"
+ yum:
+   name: "@gnome-desktop"
+   state: present
+# skip_broken: yes
+  tags:
+    - eod
+  tags:
+    - eod
+
+- name: install gdm (gnome display manager)
+  command: yum -y install gdm
 
 #- name: install Server with GUI 
 #  yum:

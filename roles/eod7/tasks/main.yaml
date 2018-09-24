@@ -96,7 +96,8 @@
 - name: install X Window System
   yum:
     name: "@X Window System"
-    state: present
+#    state: present
+    state: latest
 # skip_broken: yes
   tags:
     - eod

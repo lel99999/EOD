@@ -105,7 +105,7 @@
 #  shell: yum -y groupinstall "gnome-desktop"
   yum:
     name: "@gnome-desktop"
-    tate: present
+    state: present
 # skip_broken: yes
   tags:
     - eod

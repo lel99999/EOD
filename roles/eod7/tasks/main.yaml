@@ -336,27 +336,27 @@
   tags:
     - eod
 
-- name: Set recursive admin permissions on log file
-  acl:
-    path: "{{ eod_install_directory }}"
-    entity: "{{ restricted_group_name }}"
-    etype: group
-    permissions: rwX
-    recursive: yes
-    state: present
-  tags:
-    - eod
+#- name: Set recursive admin permissions on log file
+#  acl:
+#    path: "{{ eod_install_directory }}"
+#    entity: "{{ restricted_group_name }}"
+#    etype: group
+#    permissions: rwX
+#    recursive: yes
+#    state: present
+#  tags:
+#    - eod
 
-- name: Set default admin permissions on log file
-  acl:
-    path: "{{ eod_install_directory }}"
-    entity: "{{ restricted_group_name }}"
-    etype: group
-    permissions: rwX
-    default: yes
-    state: present
-  tags:
-    - eod
+#- name: Set default admin permissions on log file
+#  acl:
+#    path: "{{ eod_install_directory }}"
+#    entity: "{{ restricted_group_name }}"
+#    etype: group
+#    permissions: rwX
+#    default: yes
+#    state: present
+#  tags:
+#    - eod
 
 ### Ensure the needed ports are open
 - name: create custom chain

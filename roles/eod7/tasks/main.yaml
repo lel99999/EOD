@@ -110,6 +110,11 @@
 # skip_broken: yes
   tags:
     - eod
+
+- name: install gnome-backgrounds
+  yum:
+    name: gnome-backgrounds
+    state: present
   
 - name: install gdm (gnome display manager)
   command: yum -y install gdm

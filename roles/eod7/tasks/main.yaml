@@ -151,7 +151,7 @@
 #- debug: var="{{ xfce4desktop.stdout }}"
 
 - name: install MATE (GNOME 2) Desktop 
-  command: yum -y install mate-desktop
+  command: yum -y install mate-desktop mate-settings-daemon* mate-background* mate-theme*
 #  command: yum -y groupinstall "MATE Desktop"
 #  yum:
 #    name: "@MATE Desktop"

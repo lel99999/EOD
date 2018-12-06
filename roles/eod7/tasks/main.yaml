@@ -13,6 +13,8 @@
     - expect
   tags:
     - eod
+- name: add symlink fix
+  command: ln -sf /opt/VBoxGuestAdditions-5.1.20/lib/VBoxGuestAdditions/mount.vboxsf /sbin/mount.vboxsf
 
 - include: install_eod.yaml
   when: eod_install
@@ -121,9 +123,9 @@
 #    - eod
 #- debug: var="{{ matedesktop.stdout }}"
 
-#- name: install epel-latest repo
-#  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-#  when:
+- name: install epel-latest repo
+  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  when:
 
 - name: install XFCE4 Desktop 
   yum:
@@ -134,8 +136,8 @@
     - eod
 #- debug: var="{{ xfce4desktop.stdout }}"
 
-#- name: install MATE (GNOME 2) Desktop 
-#  command: yum -y groupinstall "MATE Desktop"
+- name: install MATE (GNOME 2) Desktop 
+  command: yum -y groupinstall "MATE Desktop"
 #  yum:
 #    name: "@MATE Desktop"
 #    state: present
@@ -238,7 +240,7 @@
   notify:
     - restart eod
   tags:
-  - eod
+    - eod
 
 - name: Remove gpk-update-icon file from /etc/xdg/autostart directory
   file:

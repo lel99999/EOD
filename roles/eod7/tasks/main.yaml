@@ -16,15 +16,21 @@
 
 - include: install_eod.yaml
   when: eod_install
+  tags:
+    - eod
 
 - include: upgrade_eod.yaml
   when: eod_upgrade
+  tags:
+    - eod
 
 - name: Configure node.cfg
   template:
     src: node.cfg.j2
     dest: "{{ eod_install_directory }}/conf/admin/node.cfg"
   when: eod_datastore_directory is defined
+  tags:
+    - eod
 
 - name: Configure cluster.cfg
   template:
@@ -44,12 +50,16 @@
     group: root
     mode: 0750
   with_items: "{{ eod_admins }}"
+  tags:
+    - eod
 
 - name: Ensure admins can login via Connection Server
   template:
     src: admin_settings.cfg.j2
     dest: "{{ eod_install_directory }}/conf/users/{{ item }}/settings.cfg"
   with_items: "{{ eod_admins }}"
+  tags:
+    - eod
 
 - name: Configure xdmcp
   template:
@@ -115,9 +125,13 @@
   yum:
     name: gnome-backgrounds
     state: present
+  tags:
+    - eod
   
 - name: install gdm (gnome display manager)
   command: yum -y install gdm
+  tags:
+    - eod
 
 #- name: install Server with GUI 
 #  yum:
@@ -313,6 +327,8 @@
     exit 0
   args:
     executable: /bin/expect
+  tags:
+    - eod
 
 ### Ensure EOD starts on boot
 

@@ -1,5 +1,5 @@
 ---
-- hosts: research_eod,research_eod7 
+- hosts: research_eod,research_eod7, wdcdreseodl05.cfpb.local, wdcdreseodl06.cfpb.local  
   become: yes
   become_method: sudo
 #  pre_tasks:

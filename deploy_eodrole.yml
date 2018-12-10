@@ -3,6 +3,11 @@
   become: yes
   become_method: sudo
 #  pre_tasks:
+  pre_tasks:
+    - name: install libselinux-python
+      yum:
+        name: libselinux-python
+        state: present
   roles:
     - common7
     - eod7

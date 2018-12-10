@@ -14,6 +14,11 @@
   tags:
     - eod
 
+#- name: set up RHEL 7 EPEL Repository
+#  become: yes
+#  become_method:  sudo
+#  command:  subscription-manager repo --enable r-epel-rhel-7-x86-64
+
 - include: install_eod.yaml
   when: eod_install
   tags:
@@ -121,12 +126,12 @@
   tags:
     - eod
 
-- name: install gnome-backgrounds
-  yum:
-    name: gnome-backgrounds
-    state: present
-  tags:
-    - eod
+#- name: install gnome-backgrounds
+#  yum:
+#    name: gnome-backgrounds
+#    state: present
+#  tags:
+#    - eod
   
 - name: install gdm (gnome display manager)
   command: yum -y install gdm

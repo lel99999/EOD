@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: wdcdreseodl05
   become: yes
   become_method: sudo
 #  pre_tasks:

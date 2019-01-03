@@ -118,10 +118,11 @@
     - eod
 
 - name: install Desktop
+  shell: yum -y groupinstall gnome-desktop x11 fonts
 #  shell: yum -y groupinstall "gnome-desktop"
-  yum:
-    name: "@gnome-desktop"
-    state: present
+#  yum:
+#    name: "@gnome-desktop"
+#    state: present
 # skip_broken: yes
   tags:
     - eod

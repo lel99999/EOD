@@ -108,16 +108,18 @@
 #- name: install gdm (gnome display manager)
 #  command: yum -y install gdm
   
-- name: install X Window System
-  yum:
-    name: "@X Window System"
+#- name: install X Window System
+#  yum:
+#    name: "@X Window System"
 #    state: present
-    state: latest
+#    state: latest
 # skip_broken: yes
-  tags:
-    - eod
+#  tags:
+#    - eod
 
-#- name: install Desktop
+- name: install Desktop
+  shell: yum -y groupinstall X11
+#  shell: yum -y groupinstall X11 --setopt=group_package_types=mandatory,default,optional
 #  shell: yum -y groupinstall gnome-desktop x11 fonts --skip-broken
 #  shell: yum -y groupinstall "gnome-desktop"
 #  yum:

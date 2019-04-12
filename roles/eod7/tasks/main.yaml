@@ -159,8 +159,8 @@
 #    - eod
 #- debug: var="{{ matedesktop.stdout }}"
 
-#- name: install epel-latest repo
-#  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+- name: install epel-latest repo
+  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 #  when:
 
 - name: install XFCE4 Desktop 
@@ -171,16 +171,19 @@
   tags:
     - eod
 #- debug: var="{{ xfce4desktop.stdout }}"
+- name: update libraries for MATE installation
+  command: yum -y update --enablerepo=epel-testing
 
 - name: install MATE (GNOME 2) Desktop 
-  command: yum -y install mate-desktop mate-settings-daemon* mate-background* mate-theme*
-#  command: yum -y groupinstall "MATE Desktop"
-#  yum:
-#    name: "@MATE Desktop"
-#    state: present
-#  register: matedesktop
-  tags:
-    - eod
+#  command: yum -y groupinstall mate-desktop
+# command: yum -y install mate-desktop mate-settings-daemon* mate-background* mate-theme*
+  command: yum -y groupinstall "MATE Desktop"
+# yum:
+#   name: "@MATE Desktop"
+#   state: present
+# register: matedesktop
+# tags:
+#   - eod
 #- debug: var="{{ matedesktop.stdout }}"
 
 #- name: install General Purpose Desktop
@@ -221,7 +224,7 @@
 - name: Set configuration settings for gdm mandatory
   shell: "gconftool-2 --direct --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory --type {{ item.type }} --set {{ item.setting }} {{ item.value }}"
   with_items: "{{ gconf_settings }}"
-  notify:
+  kotify:
     - restart gdm
 #   - restart prefdm
   tags:
@@ -418,6 +421,22 @@
   when: iptables_config and deploy_iptables
   tags:
     - eod
+
+- name: fix XFCE4 PolicyKit Agent Error
+  lineinfile:
+    path: /etc/xdg/autostart/xfce-polkit.desktop
+    regexp: '^Exec=/usr/libexec/xfce-polkit'
+    line: '#Exec=/usr/libexec/xfce-polkit'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: replace XFCE4 PolicyKit Agent with GNOME/MATE agent
+  lineinfile:
+    path: /etc/xdg/autostart/xfce-polkit.desktop
+    regexp: '^Exec='
+    insertafter: '^#Exec='
+    line: 'Exec=/usr/libexec/polkit-mate-authentication-agent-1'
 
 #- name: Add /usr/local/eod/conf/admin/Xconfig/*.cfg files to register
 #  shell: find /usr/local/eod/conf/admin/Xconfig/ -type f -name \*.cfg -printf "%f\n"

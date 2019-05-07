@@ -41,6 +41,9 @@
       yum:
         name: libselinux-python
         state: present
+    - name: Install bash autocomplete
+      shell: yum install -y bash-completion bash-completion-extras
+
   roles:
     - common7
     - eod7

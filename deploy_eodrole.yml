@@ -28,14 +28,70 @@
       register: enabled_repos
     - debug:
         msg: "RHEL Enabled Repos: {{ enabled_repos }}"
-        
+
+# COMMON for Research Environment
+# roles:
+#   - {role: iptables, when: "iptables_config"}
+#   - {role: common, when: "install_glusterfs"}
+#   - {role: epel, when: "use_epel and not 'production' in group_names"}
+#   - emacs
+#   - jdk
+#   - odbc
+#   - postgresql-client
+# post_tasks:
+#   - name: research eod symlinks
+#     file:
+#        src: "{{ item.src }}"
+#        dest: "{{ item.dest }}"
+#     with_items: "{{ eod_symlinks }}"
+
+#   - name: Install xauth dependency
+#     yum:
+#       name: xorg-x11-xauth
+#       state: present
+
+#   - name: Ensure X11 Forwarding is present
+#     lineinfile:
+#       dest: /etc/ssh/sshd_config
+#       regexp: ^\s*X11Forwarding\s*no
+#       line: X11Forwarding yes
+#     when: not custom_repo
+
+#   - name: Ensure ClientAliveCountMax is set to correct value
+#     lineinfile:
+#       dest: /etc/ssh/sshd_config
+#       regexp: ^\s*ClientAliveCountMax\s*[0-9]+
+#       line: ClientAliveCountMax 384
+#     when: not custom_repo
+
+#   - name: Ensure run level 5
+#     lineinfile:
+#       dest: /etc/inittab
+#       regexp: initdefault
+#       line: "id:5:initdefault:"
+
+#   - name: research printers symlinks
+#     file:
+#       state: link
+#       src: "{{ item.src }}"
+#       dest: "{{ item.dest }}"
+#     with_items: "{{ printers_symlinks }}"
+
+#   - name: Install git
+#     yum:
+#       name: git
+#       state: present
+
+
+
+
 # tasks:
 #   - name: download epel
 #     shell:  wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -O /tmp/epel-release-latest-7.noarch.rpm
 #   - name: Install epel
 #     shell:  yum -y localinstall /tmp/epel*rpm
-    - name: install Epel
-      shell: yum install -y epel-release
+#   - name: install Epel
+#     shell: yum install -y epel-release
 
     - name: install libselinux-python
       yum:
@@ -45,6 +101,7 @@
       shell: yum install -y bash-completion bash-completion-extras
 
   roles:
+    - epel7
     - common7
     - eod7
 

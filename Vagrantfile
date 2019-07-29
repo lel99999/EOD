@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "eodrh7" do |eodrh7|
 #   eodrh7.vm.box = "RHEL7.5.1_baserepo"
-    eodrh7.vm.box = "RH7.5_baserepo"
+    eodrh7.vm.box = "clouddood/RH7.5_baserepo"
 #   eodrh7.vm.box = "generic/rhel7"
     #eodrh7.vm.box = "iamseth/rhel-7.3"
     #eodrh7.vm.box = "javier-lopez/rhel-7.4"

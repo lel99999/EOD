@@ -447,7 +447,10 @@
     regexp: '^Exec='
     insertafter: '^#Exec='
     line: 'Exec=/usr/libexec/polkit-mate-authentication-agent-1'
-
+- name: install xfce4 trash can fix
+  yum:
+    name: gvfs
+    state: latest
 #- name: Add /usr/local/eod/conf/admin/Xconfig/*.cfg files to register
 #  shell: find /usr/local/eod/conf/admin/Xconfig/ -type f -name \*.cfg -printf "%f\n"
 #  register: cfg_files

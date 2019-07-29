@@ -99,10 +99,6 @@
         state: present
     - name: Install bash autocomplete
       shell: yum install -y bash-completion bash-completion-extras
-    - name: Install trash can fix
-      yum:
-        name: gvfs
-        state: latest
 
   roles:
     - epel7

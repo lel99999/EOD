@@ -3,7 +3,7 @@
 ### EoD SETTINGS ###
 #==================#
 install_desktop: False
-eod_restart: False
+#eod_restart: False
 eod_install: True
 eod_upgrade: False
 #eod_installer: ecs-13.8.5-linux-x64.bin

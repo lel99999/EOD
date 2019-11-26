@@ -1,23 +1,18 @@
----
-- name: Install EOD dependencies
-  become: yes
-  become_method: sudo
-  yum:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - openssl
-    - openssl-devel
-#   - abyssinica-fonts
-    - tree
-    - expect
-  tags:
-    - eod
-
-#- name: set up RHEL 7 EPEL Repository
-#  become: yes
-#  become_method:  sudo
-#  command:  subscription-manager repo --enable r-epel-rhel-7-x86-64
+--- 
+- name: Install EOD dependencies 
+  become: yes 
+  become_method: sudo 
+  yum: 
+    name: "{{ item }}" 
+    state: present 
+  with_items: 
+    - openssl 
+    - openssl-devel 
+#   - abyssinica-fonts 
+    - tree 
+    - expect 
+  tags: 
+    - eod 
 
 - include: install_eod.yaml
   when: eod_install
@@ -162,9 +157,10 @@
 #  tags:
 #    - eod
 #- debug: var="{{ matedesktop.stdout }}"
-
-- name: install epel-latest repo
-  command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+ 
+## Handled by epel7 roles
+#- name: install epel-latest repo
+# command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 #  when:
 
 - name: install XFCE4 Desktop 

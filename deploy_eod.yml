@@ -1,6 +1,5 @@
 ---
-#- hosts: eodrh7
-- hosts: wdcdevreeodl03
+- hosts: eodrh7
   become: yes
   become_method: sudo
   vars:

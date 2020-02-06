@@ -36,8 +36,8 @@ Vagrant.configure("2") do |config|
     # Update
     eodrh7.vm.provision "update", type: "ansible" do |ansible|
 #     ansible.playbook = "deploy_eodrole.yml"
-#     ansible.playbook = "deploy_eodPatch.yml"
-      ansible.playbook = "deploy_eod.yml"
+      ansible.playbook = "deploy_eodPatch.yml"
+#     ansible.playbook = "deploy_eod.yml"
       ansible.inventory_path = "vagrant_hosts"
       #ansible.tags = ansible_tags
       #ansible.verbose = ansible_verbosity

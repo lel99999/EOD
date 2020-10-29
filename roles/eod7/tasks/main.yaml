@@ -112,8 +112,10 @@
 #  tags:
 #    - eod
 
-- name: install "X Window System 
-  shell: yum -y groupinstall "X Window System"
+# Change to Server with GUI - better compatibility Oct/2020
+# See line 145
+#- name: install "X Window System 
+#  shell: yum -y groupinstall "X Window System"
 
 #- name: install Desktop
 # shell: yum -y groupinstall X11  
@@ -140,13 +142,13 @@
   tags:
     - eod
 
-#- name: install Server with GUI 
-#  yum:
-#    name: "@^Server with GUI"
-#    state: present
-#  register: serverwithgui
-#  tags:
-#    - eod
+- name: install Server with GUI 
+  yum:
+    name: "@^Server with GUI"
+    state: present
+  register: serverwithgui
+  tags:
+    - eod
 #- debug: var="{{ serverwithgui.stdout }}"
 
 #- name: install MATE (GNOME 2) Desktop 
@@ -163,9 +165,10 @@
 # command: yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 #  when:
 
+# Need to have epel7 repo to install XFCE4
 - name: install XFCE4 Desktop 
   yum:
-    name: "@xfce"
+    name: "@Xfce"
     state: present
   register: xfce4desktop
   tags:

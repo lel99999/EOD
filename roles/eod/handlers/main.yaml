@@ -8,11 +8,12 @@
   when: install_eod and eod_restart
 
 - name: restart gdm
-  shell: killall gdm-binary
+# shell: killall gdm-binary
+  shell: systemctl restart display-manager
   ignore_errors: yes
   when: eod_restart
 
-- name: restart prefdm
-  shell: restart prefdm
-  ignore_errors: yes
-  when: eod_restart
+#- name: restart prefdm
+#  shell: restart prefdm
+#  ignore_errors: yes
+#  when: eod_restart

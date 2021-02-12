@@ -1,12 +1,14 @@
 ---
 - name: Install EOD dependencies
+  become: yes
+  become_method: sudo
   yum:
     name: "{{ item }}"
     state: present
   with_items:
     - openssl
     - openssl-devel
-    - abyssinica-fonts
+#   - abyssinica-fonts
     - tree
     - expect
   tags:
@@ -94,14 +96,15 @@
 
 - name: install Desktop
   yum:
-    name: "@Desktop"
+    name: "@gnome-desktop"
     state: present
   tags:
     - eod
 
-- name: install General Purpose Desktop
+#- name: install General Purpose Desktop
+- name: install Fonts
   yum:
-    name: "@General Purpose Desktop"
+    name: "@fonts"
     state: present
   tags:
     - eod
@@ -194,7 +197,8 @@
     - eod
 
 - name: run gdm
-  command: start prefdm
+# command: start prefdm  -- for CentOS/RHEL6
+  command: systemctl start display-manager 
   register: gdm_status
   failed_when: gdm_status.rc != 0 and "Job is already running" not in gdm_status.stderr
   changed_when: gdm_status.rc == 0
@@ -253,20 +257,28 @@
     - eod
 
 ### Ensure the needed ports are open
+- name: create custom chain
+  command: "iptables -N {{ iptables_chain }}"
+  ignore_errors: yes
 
 - name: open up ports in ipconfig
-  command: "iptables -I {{ iptables_chain }} 3 -p tcp -m tcp --dport {{ item }} -j ACCEPT"
+  command: "iptables -A {{ iptables_chain }} -p tcp -m tcp --dport {{ item }} -j ACCEPT"
+  #command: "iptables -I {{ iptables_chain }} 3 -p tcp -m tcp --dport {{ item }} -j ACCEPT"
   with_items: "{{ eod_client_ports }}"
   when: iptables_config and deploy_iptables
   tags:
     - eod
 
 - name: open up udp port in ipconfig
-  command: "iptables -I {{ iptables_chain }} 3 -p udp -m udp --dport {{ item }} -j ACCEPT"
+  command: "iptables -A {{ iptables_chain }} -p udp -m udp --dport {{ item }} -j ACCEPT"
+  #command: "iptables -I {{ iptables_chain }} 3 -p udp -m udp --dport {{ item }} -j ACCEPT"
   with_items: "{{ eod_client_ports_udp }}"
   when: iptables_config and deploy_iptables
   tags:
     - eod
+
+- name: install iptables-service
+  command: yum -y install iptables-services
 
 - name: save the new ipconfig
   command: "/sbin/service iptables save"

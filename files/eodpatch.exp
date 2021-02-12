@@ -1,0 +1,19 @@
+#!/bin/expect -f
+#
+
+#set timeout -1
+set timeout 120
+
+spawn /usr/local/eod/bin/patch
+
+match_max 100000
+expect -exact "\r
+patch - Patch script for Exceed Connection Server 13.8\r
+\r
+\r
+Proceed to patch permissions bits for /usr/local/eod/bin/sys directory and /usr/local/eod/bin/sys/ewebhost file?\r
+ \[y\]es or \[n\]o, \[Enter\] for no: "
+send -- "y\r"
+#expect eof
+#expect eod
+interact

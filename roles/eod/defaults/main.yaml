@@ -4,11 +4,14 @@
 #==================#
 install_desktop: False
 eod_restart: False
-eod_install: False
+eod_install: True
 eod_upgrade: False
-eod_installer: ecs-13.8.5-linux-x64.bin
+#eod_installer: ecs-13.8.5-linux-x64.bin
+eod_installer: ecs-13.8.9-linux-x64.bin
 eod_upgrader:
-eod_installer_directory: '/artifacts'
+#eod_installer_directory: '/artifacts'
+eod_installer_directory: '/tmp'
+custom_repo: True
 
 eod_client_ports:
   - 5500
@@ -21,6 +24,9 @@ eod_client_ports_udp:
 
 eod_admins:
   - vagrant
+
+restricted_group_name: vagrant
+#restricted_group_name: admin
 
 eod_install_directory: '/usr/local/eod'
 eod_cm_password: PASSWORD
@@ -40,7 +46,7 @@ eod_license_server_cache:
 
 # TODO: you can put all the keys you want to here
 eod_license_keys:
-  - AAAA-BBBBBB-CCCCCC-DDDD-EEEEEE-FFF -0123456789 123
+# - AAAA-BBBBBB-CCCCCC-DDDD-EEEEEE-FFF -0123456789 123
 
 # GDM Settings
 # This example disables the login user list
@@ -51,3 +57,10 @@ gconf_settings:
     value: "true"
 
 eod_greeter_include: false
+
+iptables_config: True
+deploy_iptables: True
+iptables_chain: TEST-INPUT
+
+install_eod: True
+eod_restart: True

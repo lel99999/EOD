@@ -85,11 +85,15 @@
 
 
 
-# tasks:
+  tasks:
 #   - name: download epel
 #     shell:  wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -O /tmp/epel-release-latest-7.noarch.rpm
-#   - name: Install epel
-#     shell:  yum -y localinstall /tmp/epel*rpm
+    - name: Install Latest EPEL
+      yum:
+        name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        state: present
+        disable_pgp_check: true        
+ 
 #   - name: install Epel
 #     shell: yum install -y epel-release
 

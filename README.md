@@ -1,6 +1,15 @@
 # EOD
 ***
-Monolithic EOD for RHEL7.x
+Monolithic EOD 13.8.x for RHEL7.x
+
+##### Adding XConfig and XStart Templates in Deployment
+
+
+
+##### XWindows Notes
+- XFCE4
+- MATE
+- GNOME
 
 ##### Fixes for RHEL 7 Issues
 Timeout issue with applications:<br/>

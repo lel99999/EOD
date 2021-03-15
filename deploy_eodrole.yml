@@ -92,7 +92,7 @@
       yum:
         name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
         state: present
-        disable_pgp_check: true        
+        disable_gpg_check: true        
  
 #   - name: install Epel
 #     shell: yum install -y epel-release

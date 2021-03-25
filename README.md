@@ -4,7 +4,24 @@ Monolithic EOD 13.8.x for RHEL7.x
 
 ##### Adding XConfig and XStart Templates in Deployment
 
+#### Incorporating XQuartz for MACs
+- XDG_SESSION_TYPE=x11 <br/>
 
+#### Error Notes
+If  [X11 connection rejected because of wrong authentication] Error:
+Add the following to ~/.ssh/rc
+```
+if read proto cookie && [ -n "$DISPLAY" ]; then
+  if [ `echo $DISPLAY | cut -c1-10` = 'localhost:' ]; then
+    # X11UseLocalhost=yes
+    echo add unix:`echo $DISPLAY | 
+      cut -c11-` $proto $cookie 
+  else 
+    # X11UseLocalhost=no 
+    echo add $DISPLAY $proto $cookie 
+  fi | xauth -q - 
+fi
+```
 
 ##### XWindows Notes
 - XFCE4
@@ -22,3 +39,4 @@ Timeout issue with applications:<br/>
              Sets a timeout interval in seconds after which if no data has been received from the client, sshd(8) will send a message through the encrypted channel to request a response from the client. The default is 0, indicating that these messages will not be sent to the client. This option applies to protocol version 2 only.<br/>
 
 3) TESTING: add ServerAlive Interval <time_value> to /etc/ssh/sshd_config to ping server for <time_value> interval, to keep connection alive<br/>
+

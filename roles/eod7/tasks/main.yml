@@ -478,3 +478,19 @@
 #  when: custom_repo
 #  tags:
 #    - eod
+
+- name: Add Xconfig files for LowRes and HiRes
+  copy:
+    src: Xconfig/
+    dest: /usr/local/eod/conf/admin/Xconfig
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Add Xstart files for xfce4.xs
+  copy:
+    src: Xstart/
+    dest: /usr/local/eod/conf/admin/Xstart
+    owner: root
+    group: root
+    mode: 0755

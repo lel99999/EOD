@@ -67,9 +67,33 @@
     dest: "{{ eod_install_directory }}/conf/admin/Xconfig/XDMCP_Query.cfg"
   notify:
     - restart eod
-    - restart gdm
+#   - restart gdm
 #   - restart prefdm
   when: custom_repo
+  tags:
+    - eod
+
+- name: Add LowResMonitor Configuration
+  template:
+    src: LowResMonitor.cfg
+    dest: "{{ eod_install_directory }}/conf/admin/Xconfig/LowResMonitor.cfg"
+# notify:
+#   - restart eod
+#   - restart gdm
+#   - restart prefdm
+# when: custom_repo
+  tags:
+    - eod
+
+- name: Add HiResMonitor Configuration
+  template:
+    src: HiResMonitor.cfg
+    dest: "{{ eod_install_directory }}/conf/admin/Xconfig/HiResMonitor.cfg"
+  notify:
+    - restart eod
+#   - restart gdm
+#   - restart prefdm
+# when: custom_repo
   tags:
     - eod
 
@@ -173,6 +197,19 @@
   register: xfce4desktop
   tags:
     - eod
+
+- name: Add Xfce4 Xstart
+  template:
+    src: HiResMonitor.cfg
+    dest: "{{ eod_install_directory }}/conf/admin/Xstart/xfce4.xs"
+  notify:
+    - restart eod
+#   - restart gdm
+#   - restart prefdm
+  when: custom_repo
+  tags:
+    - eod
+
 #- debug: var="{{ xfce4desktop.stdout }}"
 - name: update libraries for MATE installation
   command: yum -y update --enablerepo=epel-testing
@@ -379,27 +416,27 @@
   tags:
     - eod
 
-#- name: Set recursive admin permissions on log file
-#  acl:
-#    path: "{{ eod_install_directory }}"
-#    entity: "{{ restricted_group_name }}"
-#    etype: group
-#    permissions: rwX
-#    recursive: yes
-#    state: present
-#  tags:
-#    - eod
+- name: Set recursive admin permissions on log file
+  acl:
+    path: "{{ eod_install_directory }}"
+    entity: "{{ restricted_group_name }}"
+    etype: group
+    permissions: rwX
+    recursive: yes
+    state: present
+  tags:
+    - eod
 
-#- name: Set default admin permissions on log file
-#  acl:
-#    path: "{{ eod_install_directory }}"
-#    entity: "{{ restricted_group_name }}"
-#    etype: group
-#    permissions: rwX
-#    default: yes
-#    state: present
-#  tags:
-#    - eod
+- name: Set default admin permissions on log file
+  acl:
+    path: "{{ eod_install_directory }}"
+    entity: "{{ restricted_group_name }}"
+    etype: group
+    permissions: rwX
+    default: yes
+    state: present
+  tags:
+    - eod
 
 ### Ensure the needed ports are open
 - name: create custom chain
@@ -458,39 +495,24 @@
 #    - eod
 #  when: custom_repo
 
-#- name: Add XkbExtension to four files
-#  lineinfile:
-#    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
-#    regexp: XkbExtension
-#    line: XkbExtension=1
-#  with_items: "{{ cfg_files.stdout_lines }}"
-#  when: custom_repo
-#  tags:
-#    - eod
+- name: Add XkbExtension to four files
+  lineinfile:
+    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
+    regexp: XkbExtension
+    line: XkbExtension=1
+  with_items: "{{ cfg_files.stdout_lines }}"
+# when: custom_repo
+  tags:
+    - eod
 #  when: custom_repo
 
-#- name: Add Composite to four files
-#  lineinfile:
-#    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
-#    regexp: Composite
-#    line: Composite=1
-#  with_items: "{{ cfg_files.stdout_lines }}"
+- name: Add Composite to four files
+  lineinfile:
+    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
+    regexp: Composite
+    line: Composite=1
+  with_items: "{{ cfg_files.stdout_lines }}"
 #  when: custom_repo
-#  tags:
-#    - eod
+  tags:
+    - eod
 
-- name: Add Xconfig files for LowRes and HiRes
-  copy:
-    src: Xconfig/
-    dest: /usr/local/eod/conf/admin/Xconfig
-    owner: root
-    group: root
-    mode: 0755
-
-- name: Add Xstart files for xfce4.xs
-  copy:
-    src: Xstart/
-    dest: /usr/local/eod/conf/admin/Xstart
-    owner: root
-    group: root
-    mode: 0755

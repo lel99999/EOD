@@ -3,16 +3,16 @@
 - name: ensure video driver
   shell: echo foo
 
-- name: restart eod
-  command: "{{ eod_install_directory }}/bin/otecs restart"
-  when: install_eod and eod_restart
+#- name: restart eod
+# command: "{{ eod_install_directory }}/bin/otecs restart"
+#  when: install_eod and eod_restart
 
-- name: restart gdm
+#- name: restart gdm
 # shell: killall gdm-binary
 # shell: systemctl restart display-manager
-  shell: systemctl restart gdm
-  ignore_errors: yes
-  when: eod_restart
+# shell: systemctl restart gdm
+#  ignore_errors: yes
+#  when: eod_restart
 
 #- name: restart prefdm
 #  shell: restart prefdm

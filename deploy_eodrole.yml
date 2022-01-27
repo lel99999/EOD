@@ -1,5 +1,5 @@
 ---
-- hosts: eodrh7
+- hosts: wdcreeodl02
 #- hosts: wdcdreseodl05, wdcdreseodl06
   vars:
     custom_repo: true

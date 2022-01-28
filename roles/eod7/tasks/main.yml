@@ -501,7 +501,7 @@
     regexp: XkbExtension
     line: XkbExtension=1
   with_items: "{{ cfg_files.stdout_lines }}"
-# when: custom_repo
+  when: custom_repo
   tags:
     - eod
 #  when: custom_repo
@@ -512,7 +512,7 @@
     regexp: Composite
     line: Composite=1
   with_items: "{{ cfg_files.stdout_lines }}"
-#  when: custom_repo
+  when: custom_repo
   tags:
     - eod
 

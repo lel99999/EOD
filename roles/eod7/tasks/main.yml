@@ -495,24 +495,25 @@
 #    - eod
 #  when: custom_repo
 
-- name: Add XkbExtension to four files
-  lineinfile:
-    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
-    regexp: XkbExtension
-    line: XkbExtension=1
-  with_items: "{{ cfg_files.stdout_lines }}"
-  when: custom_repo
-  tags:
-    - eod
+### --------------------- Modified 012021
+#- name: Add XkbExtension to four files
+#  lineinfile:
+#    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
+#    regexp: XkbExtension
+#    line: XkbExtension=1
+#  with_items: "{{ cfg_files.stdout_lines }}"
+#  when: custom_repo
+#  tags:
+#    - eod
 #  when: custom_repo
 
-- name: Add Composite to four files
-  lineinfile:
-    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
-    regexp: Composite
-    line: Composite=1
-  with_items: "{{ cfg_files.stdout_lines }}"
-  when: custom_repo
-  tags:
-    - eod
+#- name: Add Composite to four files
+#  lineinfile:
+#    dest: "{{ eod_Xconfig_directory }}/{{ item }}"
+#    regexp: Composite
+#    line: Composite=1
+#  with_items: "{{ cfg_files.stdout_lines }}"
+#  when: custom_repo
+#  tags:
+#    - eod
 
